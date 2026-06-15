@@ -20,7 +20,7 @@ export default function APropos() {
 
       <div className="stats">
         <div>
-          <div className="stat__num">4</div>
+          <div className="stat__num">7</div>
           <div className="stat__label">vues</div>
         </div>
         <div>

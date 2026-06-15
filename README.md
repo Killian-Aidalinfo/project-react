@@ -7,6 +7,9 @@ Projet réalisé dans le cadre de CESI INF83.
 
 - **Accueil** — présentation + sections animées
 - **Travaux** — grille de cartes
+- **Services** — éventail de prestations
+- **Équipe** — présentation des membres
+- **FAQ** — accordéon interactif
 - **À propos** — texte + statistiques
 - **Contact** — formulaire avec gestion d'état
 - **404** — page non trouvée (catch-all)
