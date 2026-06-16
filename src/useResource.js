@@ -11,8 +11,8 @@ export function useResource(loader) {
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
-    setError(null);
+    // L'état initial est déjà { loading: true, error: null } et l'effet ne
+    // s'exécute qu'au montage (dépendances vides), inutile de le réinitialiser.
 
     loader()
       .then((result) => {

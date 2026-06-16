@@ -13,9 +13,9 @@ export default function Contact() {
 
     const form = e.target;
     const payload = {
-      nom: form.nom.value,
-      email: form.email.value,
-      message: form.message.value,
+      nom: form.elements.nom.value,
+      email: form.elements.email.value,
+      message: form.elements.message.value,
     };
 
     try {
