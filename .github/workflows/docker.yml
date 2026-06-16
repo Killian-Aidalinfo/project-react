@@ -3,6 +3,8 @@ name: Docker
 on:
   push:
     branches: [main]
+    paths:
+      - package.json
   workflow_dispatch:
 
 env:
@@ -29,14 +31,10 @@ jobs:
           SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
         run: docker login ${{ env.REGISTRY }} -u nologin -p "$SCW_SECRET_KEY"
 
-      - name: Ensure version tag does not already exist
+      - name: Ensure git tag does not already exist
+        timeout-minutes: 2
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          IMAGE_TAG="${{ env.REGISTRY }}/${{ env.IMAGE }}:$VERSION"
-          if docker buildx imagetools inspect "$IMAGE_TAG" > /dev/null 2>&1; then
-            echo "::error::Le tag $IMAGE_TAG existe déjà dans le registre. Incrémente la version dans package.json."
-            exit 1
-          fi
           if git ls-remote --exit-code --tags origin "refs/tags/v$VERSION" > /dev/null 2>&1; then
             echo "::error::Le tag git v$VERSION existe déjà. Incrémente la version dans package.json."
             exit 1
