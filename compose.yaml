@@ -2,5 +2,9 @@ services:
   server:
     build:
       context: .
+      args:
+        # URL publique de l'API — variable de BUILD (gravée dans le bundle Vite).
+        # À définir dans Coolify avec is_buildtime: true.
+        VITE_API_URL: ${VITE_API_URL}
     ports:
       - 9526:8080

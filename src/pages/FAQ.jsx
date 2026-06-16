@@ -1,25 +1,9 @@
 import { useState } from "react";
-
-const questions = [
-  {
-    q: "Quelles technologies sont utilisées ?",
-    a: "Le site est construit avec React 19, Vite pour le bundling et React Router pour la navigation entre les vues.",
-  },
-  {
-    q: "Le projet est-il open source ?",
-    a: "Oui, le code source est public et disponible sur GitHub. Vous pouvez le cloner, l'exécuter et l'adapter librement.",
-  },
-  {
-    q: "Comment lancer le projet en local ?",
-    a: "Après avoir cloné le dépôt, exécutez « npm install » puis « npm run dev » pour démarrer le serveur de développement.",
-  },
-  {
-    q: "Puis-je ajouter mes propres pages ?",
-    a: "Bien sûr. Chaque vue est un fichier dans src/pages ; il suffit d'ajouter une route dans main.jsx et un lien dans la navigation.",
-  },
-];
+import { getFaq } from "../api";
+import { useResource } from "../useResource";
 
 export default function FAQ() {
+  const { data: questions, loading, error } = useResource(getFaq);
   const [open, setOpen] = useState(0);
 
   return (
@@ -32,11 +16,14 @@ export default function FAQ() {
         </p>
       </header>
 
+      {loading && <p className="notice">Chargement…</p>}
+      {error && <p className="notice">Impossible de charger la FAQ : {error}</p>}
+
       <div className="faq">
         {questions.map((item, i) => {
           const isOpen = open === i;
           return (
-            <div className={`faq__item ${isOpen ? "is-open" : ""}`} key={item.q}>
+            <div className={`faq__item ${isOpen ? "is-open" : ""}`} key={item.id}>
               <button
                 className="faq__q"
                 onClick={() => setOpen(isOpen ? -1 : i)}

@@ -1,27 +1,9 @@
-const services = [
-  {
-    no: "01",
-    title: "Conception d'interface",
-    text: "Maquettage et intégration de composants React clairs et réutilisables.",
-  },
-  {
-    no: "02",
-    title: "Développement front",
-    text: "Applications single-page rapides, accessibles et faciles à maintenir.",
-  },
-  {
-    no: "03",
-    title: "Intégration d'API",
-    text: "Connexion à des services distants avec gestion des états de chargement.",
-  },
-  {
-    no: "04",
-    title: "Optimisation",
-    text: "Performances, bonnes pratiques et structure de code pérenne.",
-  },
-];
+import { getServices } from "../api";
+import { useResource } from "../useResource";
 
 export default function Services() {
+  const { data: services, loading, error } = useResource(getServices);
+
   return (
     <>
       <header className="page__head">
@@ -33,10 +15,13 @@ export default function Services() {
         </p>
       </header>
 
+      {loading && <p className="notice">Chargement…</p>}
+      {error && <p className="notice">Impossible de charger les services : {error}</p>}
+
       <div className="features">
         {services.map((s, i) => (
           <article
-            key={s.no}
+            key={s.id}
             className="feature rise"
             style={{ animationDelay: `${i * 80}ms` }}
           >

@@ -1,11 +1,9 @@
-const membres = [
-  { nom: "Camille Roy", role: "Lead front-end", initiales: "CR" },
-  { nom: "Hugo Petit", role: "Développeur React", initiales: "HP" },
-  { nom: "Léa Moreau", role: "Designer UI", initiales: "LM" },
-  { nom: "Samir Benali", role: "Intégrateur", initiales: "SB" },
-];
+import { getTeam } from "../api";
+import { useResource } from "../useResource";
 
 export default function Equipe() {
+  const { data: membres, loading, error } = useResource(getTeam);
+
   return (
     <>
       <header className="page__head">
@@ -16,10 +14,13 @@ export default function Equipe() {
         </p>
       </header>
 
+      {loading && <p className="notice">Chargement…</p>}
+      {error && <p className="notice">Impossible de charger l'équipe : {error}</p>}
+
       <div className="team">
         {membres.map((m, i) => (
           <article
-            key={m.nom}
+            key={m.id}
             className="member rise"
             style={{ animationDelay: `${i * 80}ms` }}
           >

@@ -1,27 +1,9 @@
-const projets = [
-  {
-    tag: "Interface",
-    title: "Tableau de bord",
-    text: "Vue de synthèse avec composants réutilisables et données dynamiques.",
-  },
-  {
-    tag: "Données",
-    title: "Liste filtrable",
-    text: "Recherche et filtres côté client sur une collection d'éléments.",
-  },
-  {
-    tag: "Formulaire",
-    title: "Saisie validée",
-    text: "Gestion d'état contrôlée et validation des champs en temps réel.",
-  },
-  {
-    tag: "API",
-    title: "Consommation REST",
-    text: "Récupération de données distantes et états de chargement soignés.",
-  },
-];
+import { getProjects } from "../api";
+import { useResource } from "../useResource";
 
 export default function Travaux() {
+  const { data: projets, loading, error } = useResource(getProjects);
+
   return (
     <>
       <header className="page__head">
@@ -33,10 +15,13 @@ export default function Travaux() {
         </p>
       </header>
 
+      {loading && <p className="notice">Chargement…</p>}
+      {error && <p className="notice">Impossible de charger les travaux : {error}</p>}
+
       <div className="grid">
         {projets.map((p, i) => (
           <article
-            key={p.title}
+            key={p.id}
             className="card rise"
             style={{ animationDelay: `${i * 80}ms` }}
           >

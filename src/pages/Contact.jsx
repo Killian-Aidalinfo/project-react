@@ -1,11 +1,32 @@
 import { useState } from "react";
+import { sendContact } from "../api";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSent(true);
+    setError(null);
+    setSubmitting(true);
+
+    const form = e.target;
+    const payload = {
+      nom: form.nom.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+
+    try {
+      await sendContact(payload);
+      setSent(true);
+      form.reset();
+    } catch (err) {
+      setError(err.message ?? "Une erreur est survenue.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -31,12 +52,13 @@ export default function Contact() {
           <label htmlFor="message">Message</label>
           <textarea id="message" name="message" rows="5" required />
         </div>
-        <button type="submit" className="btn">
-          Envoyer
+        <button type="submit" className="btn" disabled={submitting}>
+          {submitting ? "Envoi…" : "Envoyer"}
         </button>
         {sent && (
           <p className="notice">→ Merci ! Votre message a bien été pris en compte.</p>
         )}
+        {error && <p className="notice">→ {error}</p>}
       </form>
     </>
   );

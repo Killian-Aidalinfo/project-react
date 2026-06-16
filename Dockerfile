@@ -19,6 +19,12 @@ RUN --mount=type=cache,target=/root/.npm npm ci
 # Copy the rest of the application source code into the container
 COPY . .
 
+# URL publique de l'API, injectée AU BUILD (les variables VITE_* sont gravées
+# dans le bundle par Vite ; elles n'ont aucun effet au runtime).
+# À définir dans Coolify en is_buildtime: true.
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
+
 # Build the React.js application (outputs to /app/dist)
 RUN npm run build
 
