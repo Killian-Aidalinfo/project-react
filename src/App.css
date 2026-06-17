@@ -89,33 +89,86 @@
   color: var(--ink-soft);
 }
 
-/* ---------- Home hero ---------- */
-.hero {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: end;
+/* ---------- Home manifesto ---------- */
+.manifesto-hero {
   border-bottom: 1px solid var(--line);
   padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
 }
-.hero__title {
-  font-size: clamp(3rem, 11vw, 8rem);
-  line-height: 0.92;
+.manifesto-hero__title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(2.8rem, 11vw, 7rem);
+  line-height: 0.96;
+  margin-top: 1rem;
 }
-.hero__title em {
+.manifesto-hero__title em {
   font-style: italic;
   color: var(--accent);
 }
-.hero__aside {
+.manifesto-hero__lead {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  max-width: 56ch;
   font-size: 1.05rem;
   color: var(--ink-soft);
   border-left: 2px solid var(--accent);
   padding-left: 1.25rem;
 }
+
+.manifesto-list {
+  border-top: 1px solid var(--line);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+.manifesto-row {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 4vw, 2.25rem) 0;
+  border-bottom: 1px solid var(--line);
+}
+.manifesto-row__no {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--accent-deep);
+}
+.manifesto-row__body h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.manifesto-row__body p {
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
 @media (max-width: 760px) {
-  .hero {
-    grid-template-columns: 1fr;
-    align-items: start;
+  .manifesto-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+.manifesto-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  padding: clamp(2rem, 5vw, 3rem) clamp(2rem, 5vw, 3rem);
+  border-radius: 18px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.manifesto-cta p {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  max-width: 32ch;
+}
+@media (max-width: 600px) {
+  .manifesto-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 }
 
