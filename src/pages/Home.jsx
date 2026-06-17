@@ -1,63 +1,70 @@
 import { Link } from "react-router-dom";
 
-const features = [
+const manifesto = [
   {
     no: "01",
-    title: "Routage",
-    text: "Navigation entre plusieurs vues avec React Router et liens actifs.",
+    title: "Clarté d'abord",
+    text: "Une structure lisible : layout partagé, pages isolées, styles cohérents — pas de magie inutile.",
   },
   {
     no: "02",
-    title: "Composants",
-    text: "Une structure claire : layout partagé, pages isolées, styles cohérents.",
+    title: "Construit pour durer",
+    text: "Routage, composants, tests : les bases qui permettent à un projet de grandir sans tout casser.",
   },
   {
     no: "03",
-    title: "Prêt à étendre",
-    text: "Base minimale et lisible, conçue pour grandir avec votre projet.",
+    title: "Prêt à l'emploi",
+    text: "Une fondation minimale mais complète, conçue pour être étendue selon vos besoins, pas devinée.",
   },
 ];
 
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <div>
-          <p className="eyebrow rise" style={{ animationDelay: "0ms" }}>
-            Projet React · 2026
-          </p>
-          <h1
-            className="hero__title rise"
-            style={{ animationDelay: "80ms", marginTop: "1rem" }}
-          >
-            Un point de <em>départ</em> propre.
-          </h1>
-        </div>
-        <p className="hero__aside rise" style={{ animationDelay: "180ms" }}>
-          Une application React simple, multi-vues, pensée comme socle pour
-          vos expérimentations. Explorez les pages depuis le menu.
+      <section className="manifesto-hero">
+        <p className="eyebrow rise" style={{ animationDelay: "0ms" }}>
+          Atelier · 2026
+        </p>
+        <h1 className="manifesto-hero__title">
+          <span className="rise" style={{ animationDelay: "80ms" }}>
+            On pense.
+          </span>
+          <span className="rise" style={{ animationDelay: "160ms" }}>
+            On code.
+          </span>
+          <span className="rise" style={{ animationDelay: "240ms" }}>
+            On <em>livre</em>.
+          </span>
+        </h1>
+        <p className="manifesto-hero__lead rise" style={{ animationDelay: "320ms" }}>
+          Atelier est un socle React pensé pour aller vite sans sacrifier la
+          clarté : une base saine, des pages isolées, un style cohérent du
+          premier commit à la mise en prod.
         </p>
       </section>
 
-      <section className="features">
-        {features.map((f, i) => (
+      <section className="manifesto-list">
+        {manifesto.map((m, i) => (
           <article
-            key={f.no}
-            className="feature rise"
-            style={{ animationDelay: `${260 + i * 90}ms` }}
+            key={m.no}
+            className="manifesto-row rise"
+            style={{ animationDelay: `${400 + i * 100}ms` }}
           >
-            <span className="feature__no">{f.no}</span>
-            <h3>{f.title}</h3>
-            <p>{f.text}</p>
+            <span className="manifesto-row__no">{m.no}</span>
+            <div className="manifesto-row__body">
+              <h3>{m.title}</h3>
+              <p>{m.text}</p>
+            </div>
           </article>
         ))}
       </section>
 
-      <p style={{ marginTop: "2.5rem" }}>
+      <section className="manifesto-cta rise" style={{ animationDelay: "700ms" }}>
+        <p>Envie de voir ce que ça donne en pratique ?</p>
         <Link to="/travaux" className="btn">
           Voir les travaux →
         </Link>
-      </p>
+      </section>
     </>
   );
 }

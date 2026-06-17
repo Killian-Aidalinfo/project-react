@@ -17,7 +17,6 @@ async function fetchJson(path, options) {
   }
   return res.json();
 }
-
 export const getTeam = () => fetchJson("/api/team");
 export const getServices = () => fetchJson("/api/services");
 export const getProjects = () => fetchJson("/api/projects");
